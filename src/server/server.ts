@@ -2,6 +2,7 @@ import path from 'path';
 import express, { Express } from 'express';
 import cors from 'cors';
 import { json } from 'body-parser';
+import { getWebsiteInfo } from './scrapper';
 
 const app: Express = express();
 app.use(cors());
@@ -12,6 +13,7 @@ app.use(express.static(root));
 
 app.get('/data', (_req, res) => {
   console.log("Processing /data");
+  getWebsiteInfo();
   res.send({message: "Hello world"});
 });
 
