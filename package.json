@@ -11,8 +11,10 @@
     "jest": "jest"
   },
   "dependencies": {
+    "@types/cheerio": "^0.22.31",
     "axios": "^0.27.2",
     "body-parser": "^1.20.0",
+    "cheerio": "^1.0.0-rc.12",
     "cors": "^2.8.5",
     "create-react-app": "^5.0.1",
     "express": "^4.18.1"
