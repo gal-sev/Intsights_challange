@@ -14,7 +14,7 @@ app.use(express.static(root));
 app.get('/data', (_req, res) => {
   console.log("Processing /data");
   getWebsiteInfo();
-  res.send({message: "Hello world"});
+  res.send({ message: "Hello world" });
 });
 
 app.get('*', (_req, res) => {
