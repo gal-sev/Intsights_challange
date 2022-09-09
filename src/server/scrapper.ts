@@ -5,6 +5,7 @@ interface pasteI {
 	author: string,
 	title: string,
 	shortPaste: string,
+	fullPaste: string,
 	date: string
 };
 
@@ -33,23 +34,50 @@ export function getWebsiteInfo() {
 			authors.push(author);
 			dates.push(date.toDateString());
 		});
-		// Scrape the short paste
-		//TODO: get the full paste by fetching and scraping the full paste page
-		// Scrape the dates and author
+
+		// Scrape the short pastes
 		let shortPastes: string[] = [];
 		$('.well.well-sm.well-white.pre', html).each((_index, element) => {
 			shortPastes.push($(element).text().trimStart().trimEnd());
 		});
+		
+		// Create the pastes list, without the fullPaste
 		let pastes: pasteI[] = [];
 		for (let i = 0; i < titles.length; i++) {
 			pastes.push({
 				author: authors[i],
 				title: titles[i],
 				shortPaste: shortPastes[i],
+				fullPaste: "",
 				date: dates[i]
 			});
 		}
-		console.log(pastes);
-		
+
+		// Fetch the full pastes
+		// Get the link from the buttons
+		let fullPasteCount = 0;
+		$('.btn', html).each((paste_btn_index, element) => {
+			const rawLink = $(element).attr("href");
+			console.log("Fetching from " + rawLink);
+			axios({
+				url: rawLink,
+				proxy: {
+					host: "localhost",
+					port: 8118,
+				},
+			}).then(res => {
+				const htmlRaw = res.data;
+				$('.well.well-sm.well-white.pre', htmlRaw).each((_index, element) => {
+					// Insert the fullpaste to the according paste from the list
+					pastes[paste_btn_index].fullPaste = ($(element).text().trimStart().trimEnd());
+					fullPasteCount++;
+					console.log("current fullpaste fetched: " + fullPasteCount);
+				});
+				// If fullPastes fetches are finished:
+				if (fullPasteCount === pastes.length) {
+					console.log(pastes);
+				}
+			}).catch(err => console.log(err));
+		});
 	}).catch(err => console.log("Axios ERROR: ", err, "END OF AXIOS ERROR"));
 }
