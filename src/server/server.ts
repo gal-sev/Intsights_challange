@@ -3,7 +3,7 @@ import express, { Express } from 'express';
 import cors from 'cors';
 import { json } from 'body-parser';
 import { getWebsiteInfo } from './scrapper';
-import { createDBTable, insertData, printTable } from './database';
+import { createDBTable, deleteTableData, insertData, printTable } from './database';
 import { baseDataExample } from './scrapperDataTemp';
 
 const app: Express = express();
@@ -22,12 +22,17 @@ app.get('/data', (_req, res) => {
 app.get('/sql', (_req, res) => {
   createDBTable();
   insertData(baseDataExample);
-  res.send({ message: "SQL :D" });
+  res.send({ message: "success" });
 });
 
 app.get('/table', (_req, res) => {
   printTable();
-  res.send({ message: "SQL :D" });
+  res.send({ message: "success" });
+});
+
+app.get('/cleanTable', (_req, res) => {
+  deleteTableData();
+  res.send({ message: "success" });
 });
 
 app.get('*', (_req, res) => {
