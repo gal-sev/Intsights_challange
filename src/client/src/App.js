@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Paste from './Paste';
 
 
 function App() {
@@ -16,9 +17,14 @@ function App() {
 
   return (
     <>
-    <div>{pastes.map(paste => (
-      <li key={paste.id}>{paste.title} - {paste.date}</li>
-    ))}</div>
+    <div>
+      {pastes.map(paste => 
+        (<Paste title={paste.title}
+         author={paste.author} 
+         contentFull={paste.contentFull} 
+         date={paste.date}/>)
+      )}
+    </div>
     </>
   );
 }
