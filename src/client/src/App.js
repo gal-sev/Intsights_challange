@@ -3,19 +3,23 @@ import axios from 'axios';
 
 
 function App() {
-  const [message, setMessage] = useState("");
+  const [pastes, setPastes] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios('/data');
-      setMessage(result.data.message);
+    const fetchPastes = async () => {
+      const result = await axios('/getPastes');
+      setPastes(result.data);
     };
 
-    fetchData();
+    fetchPastes();
   }, []);
 
   return (
-    <div>{message}</div>
+    <>
+    <div>{pastes.map(paste => (
+      <li key={paste.id}>{paste.title} - {paste.date}</li>
+    ))}</div>
+    </>
   );
 }
 

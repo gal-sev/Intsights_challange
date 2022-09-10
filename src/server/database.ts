@@ -54,6 +54,19 @@ export function printTable() {
 	});
 }
 
+// Get the data from the table
+export function getTableData() {
+	return new Promise((resolve, reject) => {
+		const getRows = `SELECT * FROM pastes`;
+		db.all(getRows, [], (err, rows) => {
+			if (err) {
+				reject({message: err.message});
+			}
+			resolve(rows);
+		});
+	});
+}
+
 // Delete the data from the table
 export function deleteTableData() {
 	const getRows = `DELETE FROM pastes`;
