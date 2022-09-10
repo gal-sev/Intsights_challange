@@ -1,11 +1,11 @@
 import axios from "axios";
 import cheerio from "cheerio";
 
-interface pasteI {
+export interface pasteI {
 	author: string,
 	title: string,
-	shortPaste: string,
-	fullPaste: string,
+	contentShort: string,
+	contentFull: string,
 	date: string
 };
 
@@ -14,7 +14,7 @@ export function getWebsiteInfo() {
 		url: "http://strongerw2ise74v3duebgsvug4mehyhlpa7f6kfwnas7zofs3kov7yd.onion/all",
 		proxy: {
 			host: "localhost",
-			port: 8118,
+			port: 8118,	
 		},
 	}).then(res => {
 		const html = res.data;
@@ -36,26 +36,26 @@ export function getWebsiteInfo() {
 		});
 
 		// Scrape the short pastes
-		let shortPastes: string[] = [];
+		let contentShorts: string[] = [];
 		$('.well.well-sm.well-white.pre', html).each((_index, element) => {
-			shortPastes.push($(element).text().trimStart().trimEnd());
+			contentShorts.push($(element).text().trimStart().trimEnd());
 		});
 		
-		// Create the pastes list, without the fullPaste
+		// Create the pastes list, without the contentFull
 		let pastes: pasteI[] = [];
 		for (let i = 0; i < titles.length; i++) {
 			pastes.push({
 				author: authors[i],
 				title: titles[i],
-				shortPaste: shortPastes[i],
-				fullPaste: "",
+				contentShort: contentShorts[i],
+				contentFull: "",
 				date: dates[i]
 			});
 		}
 
-		// Fetch the full pastes
+		// Fetch the full contents
 		// Get the link from the buttons
-		let fullPasteCount = 0;
+		let contentFullCount = 0;
 		$('.btn', html).each((paste_btn_index, element) => {
 			const rawLink = $(element).attr("href");
 			console.log("Fetching from " + rawLink);
@@ -66,15 +66,15 @@ export function getWebsiteInfo() {
 					port: 8118,
 				},
 			}).then(res => {
-				const htmlRaw = res.data;
-				$('.well.well-sm.well-white.pre', htmlRaw).each((_index, element) => {
-					// Insert the fullpaste to the according paste from the list
-					pastes[paste_btn_index].fullPaste = ($(element).text().trimStart().trimEnd());
-					fullPasteCount++;
-					console.log("current fullpaste fetched: " + fullPasteCount);
+				const pasteHtml = res.data;
+				$('.well.well-sm.well-white.pre', pasteHtml).each((_index, element) => {
+					// Insert the contentFull to the according paste from the list
+					pastes[paste_btn_index].contentFull = ($(element).text().trimStart().trimEnd());
+					contentFullCount++;
+					console.log("ContentFulls fetched count: " + contentFullCount);
 				});
-				// If fullPastes fetches are finished:
-				if (fullPasteCount === pastes.length) {
+				// If contentFulls fetches are finished:
+				if (contentFullCount === pastes.length) {
 					console.log(pastes);
 				}
 			}).catch(err => console.log(err));
