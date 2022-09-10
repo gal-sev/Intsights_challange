@@ -1,0 +1,29 @@
+.paste_container {
+  color: white;
+  background-color: #2f4765;
+  margin: 8px;
+  padding: 8px;
+  width: 40%;
+  min-width: 560px;
+  height: max-content;
+  border-radius: 5px;
+  .title {
+    text-align: center;
+  }
+  .contentFull {
+    border: 1px rgb(66, 66, 66) solid;
+    padding: 4px;
+    background-color: darken(#2f4765,8);
+    border-radius: 5px;
+  }
+  .footer_info {
+    display: flex;
+    justify-content: space-between;
+    .author {
+      text-align: left;
+    }
+    .date {
+      text-align: right;
+    }
+  }
+}

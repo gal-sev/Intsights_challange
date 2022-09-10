@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Paste from './Paste';
-
+import "./app.scss";
 
 function App() {
   const [pastes, setPastes] = useState([]);
@@ -17,7 +17,7 @@ function App() {
 
   return (
     <>
-    <div>
+    <div className='pastes_container'>
       {pastes.map(paste => 
         (<Paste title={paste.title}
          author={paste.author} 
