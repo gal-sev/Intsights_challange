@@ -13,19 +13,27 @@ const root: string = path.join(process.cwd(), 'client');
 
 app.use(express.static(root));
 
+//initialize interval as undefined
+let fetchInterval: any = undefined;
 
-app.get('/fetchData', (_req, res) => {
-  createDBTable();
-  console.log("Fetching data from website");
+app.get('/fetchLoop', (_req, res) => {
+  if (fetchInterval === undefined) {
+    const interval = setInterval(() => fetchData(), 120000);
+    fetchInterval = interval;
+    res.send("Fetch loop started");
+  } else {
+    res.send("Fetch loop already started");
+  }
+});
 
-  getWebsiteInfo().then((pastes: any) => {
-    console.log("Data fetched");
-    insertData(pastes);
-    res.send(`Inserted data to database: ${pastes}`);
-  }).catch(err => {
-    console.log("Data could not be fetched");
-    res.send(err.message);
-  });
+app.get('/stopFetchLoop', (_req, res) => {
+  if(fetchInterval !== undefined) {
+    clearInterval(fetchInterval);
+    fetchInterval = undefined;
+    res.send("Fetch loop stopped"); 
+  } else {
+    res.send("Fetch loop isn't active");
+  }
 });
 
 app.get('/sql', (_req, res) => {
@@ -47,6 +55,19 @@ app.get('/cleanTable', (_req, res) => {
 app.get('*', (_req, res) => {
   res.sendFile(path.join(root, 'index.html'));
 });
+
+function fetchData() {
+  createDBTable();
+  console.log("Fetching data from website");
+
+  getWebsiteInfo().then((pastes: any) => {
+    console.log("Data fetched");
+    insertData(pastes);
+    console.log(`Inserted data to database: ${pastes}`);
+  }).catch(err => {
+    console.log(`Data could not be fetched -> ${err.message}`);
+  });
+}
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
