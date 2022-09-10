@@ -13,10 +13,19 @@ const root: string = path.join(process.cwd(), 'client');
 
 app.use(express.static(root));
 
-app.get('/data', (_req, res) => {
-  console.log("Processing /data");
-  getWebsiteInfo();
-  res.send({ message: "Hello world" });
+
+app.get('/fetchData', (_req, res) => {
+  createDBTable();
+  console.log("Fetching data from website");
+
+  getWebsiteInfo().then((pastes: any) => {
+    console.log("Data fetched");
+    insertData(pastes);
+    res.send(`Inserted data to database: ${pastes}`);
+  }).catch(err => {
+    console.log("Data could not be fetched");
+    res.send(err.message);
+  });
 });
 
 app.get('/sql', (_req, res) => {

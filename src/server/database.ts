@@ -59,7 +59,6 @@ export function deleteTableData() {
 	const getRows = `DELETE FROM pastes`;
 	db.run(getRows, (err) => {
 		if (err) return console.error(err.message);
-		
 	});
 }
 
