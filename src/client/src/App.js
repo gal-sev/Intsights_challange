@@ -15,20 +15,29 @@ function App() {
 
     fetchPastes();
   }, []);
-
+  
   return (
     <>
     <SideNav></SideNav>
-    <div className='pastes_container'>
-      {pastes.map(paste => 
-        (<Paste title={paste.title}
-         author={paste.author} 
-         contentFull={paste.contentFull} 
-         date={paste.date}/>)
-      )}
+    <div className='main'>
+      <div className='pastes_container'>
+        {getPastesComponents(pastes)}
+      </div>
     </div>
     </>
   );
+}
+
+function getPastesComponents(pastes) {
+  if (pastes.length > 0) {
+    return pastes.map(paste => 
+      (<Paste title={paste.title}
+       author={paste.author} 
+       contentFull={paste.contentFull} 
+       date={paste.date}/>));
+  } else {
+    return <h1>loading</h1>;
+  }
 }
 
 export default App;

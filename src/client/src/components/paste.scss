@@ -1,9 +1,10 @@
 .paste_container {
+  transition: 0.5s;
   color: white;
   background-color: #2f4765;
   margin: 8px;
   padding: 8px;
-  width: 60%;
+  width: 60vw;
   min-width: 560px;
   height: max-content;
   border-radius: 5px;
@@ -25,5 +26,8 @@
     .date {
       text-align: right;
     }
+  }
+  &:hover {
+    scale: 1.05;
   }
 }
