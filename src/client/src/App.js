@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Paste from './Paste';
+import Paste from './components/Paste';
 import "./app.scss";
+import SideNav from './components/sideNav';
 
 function App() {
   const [pastes, setPastes] = useState([]);
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <>
+    <SideNav></SideNav>
     <div className='pastes_container'>
       {pastes.map(paste => 
         (<Paste title={paste.title}

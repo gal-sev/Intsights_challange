@@ -25,6 +25,7 @@ export function getWebsiteInfo() {
 			$('.col-sm-5', html).each((_index, element) => {
 				titles.push($(element).text().trimStart().trimEnd());
 			});
+			//use regex here instead of the trim? .replace(/^\s+|\s+$/gm, "")
 			// Scrape the dates and author
 			let dates: string[] = [];
 			let authors: string[] = [];
