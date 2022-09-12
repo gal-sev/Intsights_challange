@@ -39,8 +39,14 @@ export function getWebsiteInfo() {
 
 				//Insert the author and date
 				$(element).siblings("td").each((index, sibling) => {
-					const sibling_text = $(sibling).text();
+					let sibling_text = $(sibling).text();
 					if(index == 0) {
+						// Transform unknown authors to "Anonymous"
+						if (sibling_text.toLowerCase() == "anonymous" || 
+						sibling_text.toLowerCase() == "unknown" ||
+						sibling_text.toLowerCase() == "guest") {
+							sibling_text = "Anonymous";
+						}
 						pastes[element_index].author = sibling_text;
 					} else if (index == 2) {
 						pastes[element_index].date = chrono.parseDate(sibling_text).toUTCString();
@@ -57,8 +63,8 @@ export function getWebsiteInfo() {
 						port: 8118,
 					},
 				}).then(res => {
-					const content = res.data;
-					pastes[element_index].content = content;
+					const content: string = res.data;
+					pastes[element_index].content = content.trimStart().trimEnd();
 					contentCount++;
 					console.log("Contents fetched count: " + contentCount);
 					// If content fetches are finished:

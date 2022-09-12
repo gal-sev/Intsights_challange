@@ -78,7 +78,7 @@ function fetchData() {
   getWebsiteInfo().then((pastes: any) => {
     console.log("Data fetched");
     insertData(pastes);
-    console.log(`Inserted data to database: ${pastes}`);
+    console.log(`Inserted data to database`);
   }).catch(err => {
     console.log(`Data could not be fetched -> ${err.message}`);
   });
