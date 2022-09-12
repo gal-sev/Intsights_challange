@@ -51,16 +51,14 @@ export function getWebsiteInfo() {
 				//Insert the content
 				console.log("Fetching paste " + pasteID);
 				axios({
-					url: `http://paste2vljvhmwq5zy33re2hzu4fisgqsohufgbljqomib2brzx3q4mid.onion/api/paste/${pasteID}`,
+					url: `http://paste2vljvhmwq5zy33re2hzu4fisgqsohufgbljqomib2brzx3q4mid.onion/view/raw/${pasteID}`,
 					proxy: {
 						host: "localhost",
 						port: 8118,
 					},
 				}).then(res => {
 					const content = res.data;
-					const $ = cheerio.load(content.paste);
-					
-					pastes[element_index].content = $("ol").text();
+					pastes[element_index].content = content;
 					contentCount++;
 					console.log("Contents fetched count: " + contentCount);
 					// If content fetches are finished:
