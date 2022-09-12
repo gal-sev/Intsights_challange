@@ -1,6 +1,4 @@
-import { pasteI } from "./scrapper";
-
-export const baseDataExample: pasteI[] = [
+export const baseDataExample = [
 	{
 	  author: 'Anonymous',
 	  title: 'Best Onion Child Porn ❤️',
@@ -9,7 +7,7 @@ export const baseDataExample: pasteI[] = [
 		'http://filebox4yfmgpmkoh6d654y3f5vle7qial6pggibc6wam7wxq5sj3pad.onion/dl/?file_id=tPNPNqv4EQsU\n' +
 		'http://filebox4yfmgpmkoh6d654y3f5vle7qial6pggibc6wam7wxq5sj3pad.onion/dl/?file_id=KJFHONsX0qNK\n' +
 		'http://filebox4yfmgpmkoh6d654y3f5vle7qial6pggibc6wam7wxq5sj3pad.onion/dl/?file_id=hZgEuYm5pF6Y',
-	  contentFull: 'http://cpsexxklpu7kgwu4h4noa6ewlwinszoo6gw463elubo4y2lc3u6nfnyd.onion/\n' +
+	  content: 'http://cpsexxklpu7kgwu4h4noa6ewlwinszoo6gw463elubo4y2lc3u6nfnyd.onion/\n' +
 		'http://filebox4yfmgpmkoh6d654y3f5vle7qial6pggibc6wam7wxq5sj3pad.onion/dl/?file_id=1bjJAJCVxGCt\n' +
 		'http://filebox4yfmgpmkoh6d654y3f5vle7qial6pggibc6wam7wxq5sj3pad.onion/dl/?file_id=tPNPNqv4EQsU\n' +
 		'http://filebox4yfmgpmkoh6d654y3f5vle7qial6pggibc6wam7wxq5sj3pad.onion/dl/?file_id=KJFHONsX0qNK\n' +
@@ -20,7 +18,7 @@ export const baseDataExample: pasteI[] = [
 	  author: 'Anonymous',
 	  title: 'Exploit Live Scanner',
 	  contentShort: 'http://k3phr3ag4vk63knm5xcopskebrhpfjyq6dx24x2do653vtmrd27mivid.onion/',
-	  contentFull: 'http://k3phr3ag4vk63knm5xcopskebrhpfjyq6dx24x2do653vtmrd27mivid.onion/',
+	  content: 'http://k3phr3ag4vk63knm5xcopskebrhpfjyq6dx24x2do653vtmrd27mivid.onion/',
 	  date: 'Fri Sep 09 2022'
 	},
 	{
@@ -29,7 +27,7 @@ export const baseDataExample: pasteI[] = [
 	  contentShort: 'Anonymous marketplace + guaranted secure escrow system\n' +
 		' \n' +
 		'http://sr4rya7za4kvocstuc7s2ed3f6tlsqbx4o5afdtqyjl4b3uzb5o23xad.onion/',
-	  contentFull: 'Anonymous marketplace + guaranted secure escrow system\n' +
+	  content: 'Anonymous marketplace + guaranted secure escrow system\n' +
 		' \n' +
 		'http://sr4rya7za4kvocstuc7s2ed3f6tlsqbx4o5afdtqyjl4b3uzb5o23xad.onion/',
 	  date: 'Fri Sep 09 2022'
@@ -42,7 +40,7 @@ export const baseDataExample: pasteI[] = [
 		'http://xttzwwygbav6pbqeyjm3k2vemhl5zomlwdgz43w3axhpn2pqyokjzyqd.onion/\n' +
 		' \n' +
 		'Free466',
-	  contentFull: 'Darknet Trusted Links\n' +
+	  content: 'Darknet Trusted Links\n' +
 		' \n' +
 		'http://xttzwwygbav6pbqeyjm3k2vemhl5zomlwdgz43w3axhpn2pqyokjzyqd.onion/\n' +
 		' \n' +
@@ -57,7 +55,7 @@ export const baseDataExample: pasteI[] = [
 		'http://xttzwwygbav6pbqeyjm3k2vemhl5zomlwdgz43w3axhpn2pqyokjzyqd.onion/\n' +
 		' \n' +
 		'Free466',
-	  contentFull: 'Darknet Trusted Links\n' +
+	  content: 'Darknet Trusted Links\n' +
 		' \n' +
 		'http://xttzwwygbav6pbqeyjm3k2vemhl5zomlwdgz43w3axhpn2pqyokjzyqd.onion/\n' +
 		' \n' +
@@ -68,7 +66,7 @@ export const baseDataExample: pasteI[] = [
 	  author: 'Anonymous',
 	  title: 'DeepMagic Shop',
 	  contentShort: 'DeepMagic Shop, sells best hashish pollen, buprenorphine (subutex), cocaine,more a section dedicated to all what is knowed about deepweb.I have been in the deep since 2011 (silk road 1) I decided to open my own site that I built myself, I am very honest I sell in different markets, but I am satisfied if users migrate to my site, I sell by email I have two emails one for clearweb and one for deepweb but I expect my users to use pgp when they contact me by email, just take a look at what I have done with my very little knowledge of html and css I have not used programs to make the site but only the knowledge that I remember even if I am very inexperienced I am satisfied wit',
-	  contentFull: 'DeepMagic Shop, sells best hashish pollen, buprenorphine (subutex), cocaine,more a section dedicated to all what is knowed about deepweb.I have been in the deep since 2011 (silk road 1) I decided to open my own site that I built myself, I am very honest I sell in different markets, but I am satisfied if users migrate to my site, I sell by email I have two emails one for clearweb and one for deepweb but I expect my users to use pgp when they contact me by email, just take a look at what I have done with my very little knowledge of html and css I have not used programs to make the site but only the knowledge that I remember even if I am very inexperienced I am satisfied with what I have built the URL is:\n' +
+	  content: 'DeepMagic Shop, sells best hashish pollen, buprenorphine (subutex), cocaine,more a section dedicated to all what is knowed about deepweb.I have been in the deep since 2011 (silk road 1) I decided to open my own site that I built myself, I am very honest I sell in different markets, but I am satisfied if users migrate to my site, I sell by email I have two emails one for clearweb and one for deepweb but I expect my users to use pgp when they contact me by email, just take a look at what I have done with my very little knowledge of html and css I have not used programs to make the site but only the knowledge that I remember even if I am very inexperienced I am satisfied with what I have built the URL is:\n' +
 		' \n' +
 		' \n' +
 		'NEW CLEAN URL ARE :\n' +
@@ -93,7 +91,7 @@ export const baseDataExample: pasteI[] = [
 	  author: 'Anonymous',
 	  title: 'DEEPMAGIC SHOP',
 	  contentShort: 'DeepMagic Shop, sells best hashish pollen, buprenorphine (subutex), cocaine,more a section dedicated to all what is knowed about deepweb.I have been in the deep since 2011 (silk road 1) I decided to open my own site that I built myself, I am very honest I sell in different markets, but I am satisfied if users migrate to my site, I sell by email I have two emails one for clearweb and one for deepweb but I expect my users to use pgp when they contact me by email, just take a look at what I have done with my very little knowledge of html and css I have not used programs to make the site but only the knowledge that I remember even if I am very inexperienced I am satisfied wit',
-	  contentFull: 'DeepMagic Shop, sells best hashish pollen, buprenorphine (subutex), cocaine,more a section dedicated to all what is knowed about deepweb.I have been in the deep since 2011 (silk road 1) I decided to open my own site that I built myself, I am very honest I sell in different markets, but I am satisfied if users migrate to my site, I sell by email I have two emails one for clearweb and one for deepweb but I expect my users to use pgp when they contact me by email, just take a look at what I have done with my very little knowledge of html and css I have not used programs to make the site but only the knowledge that I remember even if I am very inexperienced I am satisfied with what I have built the URL is:\n' +
+	  content: 'DeepMagic Shop, sells best hashish pollen, buprenorphine (subutex), cocaine,more a section dedicated to all what is knowed about deepweb.I have been in the deep since 2011 (silk road 1) I decided to open my own site that I built myself, I am very honest I sell in different markets, but I am satisfied if users migrate to my site, I sell by email I have two emails one for clearweb and one for deepweb but I expect my users to use pgp when they contact me by email, just take a look at what I have done with my very little knowledge of html and css I have not used programs to make the site but only the knowledge that I remember even if I am very inexperienced I am satisfied with what I have built the URL is:\n' +
 		' \n' +
 		' \n' +
 		'NEW CLEAN URL ARE :\n' +
@@ -118,7 +116,7 @@ export const baseDataExample: pasteI[] = [
 	  author: 'Anonymous',
 	  title: 'DeepMagic Shop',
 	  contentShort: 'DeepMagic Shop, sells best hashish pollen, buprenorphine (subutex), cocaine,more a section dedicated to all what is knowed about deepweb.I have been in the deep since 2011 (silk road 1) I decided to open my own site that I built myself, I am very honest I sell in different markets, but I am satisfied if users migrate to my site, I sell by email I have two emails one for clearweb and one for deepweb but I expect my users to use pgp when they contact me by email, just take a look at what I have done with my very little knowledge of html and css I have not used programs to make the site but only the knowledge that I remember even if I am very inexperienced I am satisfied wit',
-	  contentFull: 'DeepMagic Shop, sells best hashish pollen, buprenorphine (subutex), cocaine,more a section dedicated to all what is knowed about deepweb.I have been in the deep since 2011 (silk road 1) I decided to open my own site that I built myself, I am very honest I sell in different markets, but I am satisfied if users migrate to my site, I sell by email I have two emails one for clearweb and one for deepweb but I expect my users to use pgp when they contact me by email, just take a look at what I have done with my very little knowledge of html and css I have not used programs to make the site but only the knowledge that I remember even if I am very inexperienced I am satisfied with what I have built the URL is:\n' +
+	  content: 'DeepMagic Shop, sells best hashish pollen, buprenorphine (subutex), cocaine,more a section dedicated to all what is knowed about deepweb.I have been in the deep since 2011 (silk road 1) I decided to open my own site that I built myself, I am very honest I sell in different markets, but I am satisfied if users migrate to my site, I sell by email I have two emails one for clearweb and one for deepweb but I expect my users to use pgp when they contact me by email, just take a look at what I have done with my very little knowledge of html and css I have not used programs to make the site but only the knowledge that I remember even if I am very inexperienced I am satisfied with what I have built the URL is:\n' +
 		' \n' +
 		' \n' +
 		'NEW CLEAN URL ARE :\n' +
@@ -147,7 +145,7 @@ export const baseDataExample: pasteI[] = [
 		'http://xttzwwygbav6pbqeyjm3k2vemhl5zomlwdgz43w3axhpn2pqyokjzyqd.onion/\n' +
 		' \n' +
 		'Free464',
-	  contentFull: 'Darknet Trusted Links\n' +
+	  content: 'Darknet Trusted Links\n' +
 		' \n' +
 		'http://xttzwwygbav6pbqeyjm3k2vemhl5zomlwdgz43w3axhpn2pqyokjzyqd.onion/\n' +
 		' \n' +
@@ -158,7 +156,7 @@ export const baseDataExample: pasteI[] = [
 	  author: 'Anonymous',
 	  title: 'Exploit Live Scanner',
 	  contentShort: 'http://k3phr3ag4vk63knm5xcopskebrhpfjyq6dx24x2do653vtmrd27mivid.onion/',
-	  contentFull: 'http://k3phr3ag4vk63knm5xcopskebrhpfjyq6dx24x2do653vtmrd27mivid.onion/',
+	  content: 'http://k3phr3ag4vk63knm5xcopskebrhpfjyq6dx24x2do653vtmrd27mivid.onion/',
 	  date: 'Fri Sep 09 2022'
 	},
 	{
@@ -168,7 +166,7 @@ export const baseDataExample: pasteI[] = [
 		'Downtime Issues have been resolved.\n' +
 		'.\n' +
 		'Snow Bin - http://snowbin45znsonv227ypgbuvpqyaoolxpdg3nhhfznahe3exif6z7tyd.onion.',
-	  contentFull: '.\n' +
+	  content: '.\n' +
 		'Downtime Issues have been resolved.\n' +
 		'.\n' +
 		'Snow Bin - http://snowbin45znsonv227ypgbuvpqyaoolxpdg3nhhfznahe3exif6z7tyd.onion.\n' +
@@ -197,7 +195,7 @@ export const baseDataExample: pasteI[] = [
 		'Downtime Issues have been resolved.\n' +
 		'.\n' +
 		'Snow Bin - http://snowbin45znsonv227ypgbuvpqyaoolxpdg3nhhfznahe3exif6z7tyd.onion.',
-	  contentFull: '.\n' +
+	  content: '.\n' +
 		'Downtime Issues have been resolved.\n' +
 		'.\n' +
 		'Snow Bin - http://snowbin45znsonv227ypgbuvpqyaoolxpdg3nhhfznahe3exif6z7tyd.onion.\n' +
@@ -227,7 +225,7 @@ export const baseDataExample: pasteI[] = [
 		'Website: http://zjuhnrnaz573362iwpqm2peoozwd37yfeohyzdymmn2xlewr5li3zpqd.onion/\n' +
 		'                                                              \n' +
 		'id:5Fa1372Be9cC',
-	  contentFull: 'MITNICKLENSHACKERS provide various forms of hacking services and provide result in real-time. \n' +
+	  content: 'MITNICKLENSHACKERS provide various forms of hacking services and provide result in real-time. \n' +
 		'Contact them for whatever hacking related services you are in need of mitniklens@protonmail.com\n' +
 		'Website: http://zjuhnrnaz573362iwpqm2peoozwd37yfeohyzdymmn2xlewr5li3zpqd.onion/\n' +
 		'                                                              \n' +
@@ -240,7 +238,7 @@ export const baseDataExample: pasteI[] = [
 	  contentShort: 'A new chatroom has been opned on the dark web.\n' +
 		'           \n' +
 		'http://snowchatsq5crz3vzgr7ruxokffqoylqgbbonplsay3l4jfdvsnygdad.onion/',
-	  contentFull: 'A new chatroom has been opned on the dark web.\n' +
+	  content: 'A new chatroom has been opned on the dark web.\n' +
 		'           \n' +
 		'http://snowchatsq5crz3vzgr7ruxokffqoylqgbbonplsay3l4jfdvsnygdad.onion/                                                              \n' +
 		'           \n' +
@@ -260,7 +258,7 @@ export const baseDataExample: pasteI[] = [
 		'http://xttzwwygbav6pbqeyjm3k2vemhl5zomlwdgz43w3axhpn2pqyokjzyqd.onion/\n' +
 		' \n' +
 		'Free463',
-	  contentFull: 'Darknet Trusted Links\n' +
+	  content: 'Darknet Trusted Links\n' +
 		' \n' +
 		'http://xttzwwygbav6pbqeyjm3k2vemhl5zomlwdgz43w3axhpn2pqyokjzyqd.onion/\n' +
 		' \n' +

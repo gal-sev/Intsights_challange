@@ -15,8 +15,7 @@ export function createDBTable() {
 		id INTEGER PRIMARY KEY AUTOINCREMENT, 
 		author TEXT NOT NULL, 
 		title TEXT NOT NULL, 
-		contentShort TEXT NOT NULL, 
-		contentFull TEXT NOT NULL, 
+		content TEXT NOT NULL, 
 		date TEXT NOT NULL)`;
 	db.run(createTable);
 }
@@ -31,11 +30,11 @@ export function dropTable() {
 // Insert data to the table
 export function insertData(data: pasteI[]) {
 	data.forEach(pasteData => {
-		const insertString = `INSERT INTO pastes(author, title, contentShort, contentFull, date)
-		VALUES (?, ?, ?, ?, ?)`;
+		const insertString = `INSERT INTO pastes(author, title, content, date)
+		VALUES (?, ?, ?, ?)`;
 		db.run(insertString,
-			[pasteData.author, pasteData.title,
-			pasteData.contentShort, pasteData.contentFull, pasteData.date],
+			[pasteData.author, pasteData.title, 
+				pasteData.content, pasteData.date],
 			(err) => {
 				if (err) return console.error(err.message);
 			}

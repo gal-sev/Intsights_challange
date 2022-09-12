@@ -9,8 +9,8 @@ function App() {
 
   useEffect(() => {
     const fetchPastes = async () => {
-      const result = await axios('/getPastes');
-      setPastes(result.data);
+      const res = await axios('/getPastes');
+      setPastes(res.data);
     };
 
     fetchPastes();
@@ -33,7 +33,7 @@ function getPastesComponents(pastes) {
     return pastes.map(paste => 
       (<Paste title={paste.title}
        author={paste.author} 
-       contentFull={paste.contentFull} 
+       content={paste.content} 
        date={paste.date}/>));
   } else {
     return <h1>loading</h1>;

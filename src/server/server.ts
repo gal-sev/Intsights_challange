@@ -16,6 +16,12 @@ app.use(express.static(root));
 //initialize interval as undefined
 let fetchInterval: any = undefined;
 
+
+app.get('/fetchNormal', (_req, res) => {
+  fetchData();
+  res.send("fetching data");
+});
+
 app.get('/fetchLoop', (_req, res) => {
   if (fetchInterval === undefined) {
     const interval = setInterval(() => fetchData(), 120000);
@@ -49,6 +55,7 @@ app.get('/table', (_req, res) => {
 
 app.get('/getPastes', (_req, res) => {
   getTableData().then((pastes: any) => {
+    console.log(pastes);
     res.send(pastes);
   }).catch(err => {
     res.send({ err: `Data could not be fetched -> ${err.message}` });

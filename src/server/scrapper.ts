@@ -1,18 +1,17 @@
 import axios from "axios";
 import cheerio from "cheerio";
-
+import * as chrono from 'chrono-node';
 export interface pasteI {
 	author: string,
 	title: string,
-	contentShort: string,
-	contentFull: string,
+	content: string,
 	date: string
 };
 
 export function getWebsiteInfo() {
 	return new Promise((resolve, reject) => {
 		axios({
-			url: "http://strongerw2ise74v3duebgsvug4mehyhlpa7f6kfwnas7zofs3kov7yd.onion/all",
+			url: "http://paste2vljvhmwq5zy33re2hzu4fisgqsohufgbljqomib2brzx3q4mid.onion/lists",
 			proxy: {
 				host: "localhost",
 				port: 8118,	
@@ -20,63 +19,52 @@ export function getWebsiteInfo() {
 		}).then(res => {
 			const html = res.data;
 			const $ = cheerio.load(html);
-			// Scrape the titles
-			let titles: string[] = [];
-			$('.col-sm-5', html).each((_index, element) => {
-				titles.push($(element).text().trimStart().trimEnd());
-			});
-			//use regex here instead of the trim? .replace(/^\s+|\s+$/gm, "")
-			// Scrape the dates and author
-			let dates: string[] = [];
-			let authors: string[] = [];
-			$('.col-sm-6:even', html).each((_index, element) => {
-				const textAsArray = $(element).text().trimStart().trimEnd().split(" ");
-				const author = textAsArray[2];
-				const date = new Date(textAsArray[4] + textAsArray[5] + textAsArray[6]);
-				authors.push(author);
-				dates.push(date.toDateString());
-			});
-	
-			// Scrape the short pastes
-			let contentShorts: string[] = [];
-			$('.well.well-sm.well-white.pre', html).each((_index, element) => {
-				contentShorts.push($(element).text().trimStart().trimEnd());
-			});
+			let titleElements = $('.first', html);
 			
-			// Create the pastes list, without the contentFull
+			// Create an empty pastes list
 			let pastes: pasteI[] = [];
-			for (let i = 0; i < titles.length; i++) {
+			let contentCount = 0;
+			for (let i = 0; i < titleElements.length; i++) {
 				pastes.push({
-					author: authors[i],
-					title: titles[i],
-					contentShort: contentShorts[i],
-					contentFull: "",
-					date: dates[i]
+					author: "",
+					title: "",
+					content: "",
+					date: ""
 				});
 			}
-	
-			// Fetch the full contents
-			// Get the link from the buttons
-			let contentFullCount = 0;
-			$('.btn', html).each((paste_btn_index, element) => {
-				const rawLink = $(element).attr("href");
-				console.log("Fetching from " + rawLink);
+			
+			titleElements.each((element_index, element) => {
+				// Insert the title
+				pastes[element_index].title = $(element).text().trimStart().trimEnd();
+
+				//Insert the author and date
+				$(element).siblings("td").each((index, sibling) => {
+					const sibling_text = $(sibling).text();
+					if(index == 0) {
+						pastes[element_index].author = sibling_text;
+					} else if (index == 2) {
+						pastes[element_index].date = chrono.parseDate(sibling_text).toUTCString();
+					}
+				});
+				const pasteID = $(element).children("a").attr("href")?.split("/")[4];
+				
+				//Insert the content
+				console.log("Fetching paste " + pasteID);
 				axios({
-					url: rawLink,
+					url: `http://paste2vljvhmwq5zy33re2hzu4fisgqsohufgbljqomib2brzx3q4mid.onion/api/paste/${pasteID}`,
 					proxy: {
 						host: "localhost",
 						port: 8118,
 					},
 				}).then(res => {
-					const pasteHtml = res.data;
-					$('.well.well-sm.well-white.pre', pasteHtml).each((_index, element) => {
-						// Insert the contentFull to the according paste from the list
-						pastes[paste_btn_index].contentFull = ($(element).text().trimStart().trimEnd());
-						contentFullCount++;
-						console.log("ContentFulls fetched count: " + contentFullCount);
-					});
-					// If contentFulls fetches are finished:
-					if (contentFullCount === pastes.length) {
+					const content = res.data;
+					const $ = cheerio.load(content.paste);
+					
+					pastes[element_index].content = $("ol").text();
+					contentCount++;
+					console.log("Contents fetched count: " + contentCount);
+					// If content fetches are finished:
+					if (contentCount === titleElements.length) {
 						resolve(pastes);
 					}
 				}).catch(err => {
