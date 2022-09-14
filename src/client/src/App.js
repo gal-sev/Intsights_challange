@@ -65,7 +65,7 @@ function getPastesComponents(pastes) {
         date={paste.date}/>)
     );
   } else {
-    return <h1>No pastes avaliable</h1>;
+    return <h1 className='loading'>No pastes avaliable</h1>;
   }
 }
 

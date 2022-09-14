@@ -48,7 +48,7 @@ app.get('/createTable', (_req, res) => {
 
 app.get('/getPastes', (_req, res) => {
   getTableData().then((pastes: any) => {
-    console.log(`Sending ${pastes.length} to client`);
+    console.log(`Sending ${pastes.length} pastes to client`);
     res.send(pastes);
   }).catch(err => {
     res.send({ err: `Data could not be fetched -> ${err.message}` });
