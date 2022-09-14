@@ -8,14 +8,20 @@ import SearchBar from './components/SearchBar';
 function App() {
   const [pastes, setPastes] = useState([]);
   const [search, setSearch] = useState("");
+  const [filteredPastes, setFiltered] = useState([]);
 
   useEffect(() => {
     const fetchPastes = async () => {
       const res = await axios('/getPastes');
       setPastes(res.data);
+      setFiltered(res.data);
     };
     fetchPastes();
   }, []);
+
+  useEffect(() => {
+    setFiltered(filterPastes(pastes, search));
+  }, [pastes, search]);
   
   return (
     <>
@@ -23,37 +29,43 @@ function App() {
     <div className='main'>
     <SearchBar setSearch={(value) => setSearch(value)}></SearchBar>
       <div className='pastes_container'>
-        {getPastesComponents(pastes, search)}
+        {getPastesComponents(filteredPastes)}
       </div>
     </div>
     </>
   );
 }
 
-function getPastesComponents(pastes, searchText) {
+function filterPastes(pastes, searchText) {
+  let outputPastes = [];  
   if (pastes.length > 0) {
-    let outputPastes = [];  
     pastes.forEach(paste => {
       if (searchText !== "") {
         if (paste.title.includes(searchText) || 
         paste.author.includes(searchText) || 
-        paste.content.includes(searchText) ||
+        paste.content.includes(searchText) || 
         paste.date.includes(searchText)) {
-          outputPastes.push((<Paste title={paste.title}
-            author={paste.author} 
-            content={paste.content} 
-            date={paste.date}/>));
+          outputPastes.push(paste);
         }
       } else {
-        outputPastes.push((<Paste title={paste.title}
-          author={paste.author} 
-          content={paste.content} 
-          date={paste.date}/>));
+        outputPastes.push(paste);
       }
     });
-    return outputPastes;
+  }
+  return outputPastes;
+}
+
+function getPastesComponents(pastes) {
+  if (pastes.length > 0) {
+    return pastes.map(paste => 
+      (<Paste key={paste.id}
+        title={paste.title}
+        author={paste.author} 
+        content={paste.content} 
+        date={paste.date}/>)
+    );
   } else {
-    return <h1>loading</h1>;
+    return <h1>No pastes avaliable</h1>;
   }
 }
 

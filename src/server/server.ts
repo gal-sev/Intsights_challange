@@ -3,8 +3,7 @@ import express, { Express } from 'express';
 import cors from 'cors';
 import { json } from 'body-parser';
 import { getWebsiteInfo } from './scrapper';
-import { createDBTable, deleteTableData, getTableData, insertData, printTable } from './database';
-import { baseDataExample } from './scrapperDataTemp';
+import { createDBTable, deleteTableData, getTableData, insertData } from './database';
 
 const app: Express = express();
 app.use(cors());
@@ -17,7 +16,7 @@ app.use(express.static(root));
 let fetchInterval: any = undefined;
 
 
-app.get('/fetchNormal', (_req, res) => {
+app.get('/fetch', (_req, res) => {
   fetchData();
   res.send("fetching data");
 });
@@ -42,20 +41,14 @@ app.get('/stopFetchLoop', (_req, res) => {
   }
 });
 
-app.get('/sql', (_req, res) => {
+app.get('/createTable', (_req, res) => {
   createDBTable();
-  insertData(baseDataExample);
-  res.send({ message: "success" });
-});
-
-app.get('/table', (_req, res) => {
-  printTable();
   res.send({ message: "success" });
 });
 
 app.get('/getPastes', (_req, res) => {
   getTableData().then((pastes: any) => {
-    console.log(pastes);
+    console.log(`Sending ${pastes.length} to client`);
     res.send(pastes);
   }).catch(err => {
     res.send({ err: `Data could not be fetched -> ${err.message}` });
