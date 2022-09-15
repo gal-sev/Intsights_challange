@@ -12,7 +12,7 @@ const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
 // Create Table
 export function createDBTable() {
 	const createTable = `CREATE TABLE IF NOT EXISTS pastes(
-		id INTEGER PRIMARY KEY AUTOINCREMENT, 
+		id TEXT PRIMARY KEY, 
 		author TEXT NOT NULL, 
 		title TEXT NOT NULL, 
 		content TEXT NOT NULL, 
@@ -30,10 +30,11 @@ export function dropTable() {
 // Insert data to the table
 export function insertData(data: pasteI[]) {
 	data.forEach(pasteData => {
-		const insertString = `INSERT INTO pastes(author, title, content, date)
-		VALUES (?, ?, ?, ?)`;
+		//Ignores the insert if the paste has the same id as another one in the database
+		const insertString = `INSERT OR IGNORE INTO pastes(id, author, title, content, date)
+		VALUES (?, ?, ?, ?, ?)`;
 		db.run(insertString,
-			[pasteData.author, pasteData.title, 
+			[pasteData.id, pasteData.author, pasteData.title, 
 				pasteData.content, pasteData.date],
 			(err) => {
 				if (err) return console.error(err.message);

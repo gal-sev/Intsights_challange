@@ -2,6 +2,7 @@ import axios from "axios";
 import cheerio from "cheerio";
 import * as chrono from 'chrono-node';
 export interface pasteI {
+	id: string,
 	author: string,
 	title: string,
 	content: string,
@@ -26,6 +27,7 @@ export function getWebsiteInfo() {
 			let contentCount = 0;
 			for (let i = 0; i < titleElements.length; i++) {
 				pastes.push({
+					id: "",
 					author: "",
 					title: "",
 					content: "",
@@ -52,7 +54,10 @@ export function getWebsiteInfo() {
 						pastes[element_index].date = chrono.parseDate(sibling_text).toUTCString();
 					}
 				});
+
+				//Insert the id
 				const pasteID = $(element).children("a").attr("href")?.split("/")[4];
+				pastes[element_index].id = pasteID as string;
 				
 				//Insert the content
 				console.log("Fetching paste " + pasteID);
