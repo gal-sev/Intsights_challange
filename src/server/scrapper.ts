@@ -1,15 +1,18 @@
 import axios from "axios";
 import cheerio from "cheerio";
 import * as chrono from 'chrono-node';
+import Sentiment from "sentiment";
 export interface pasteI {
 	id: string,
 	author: string,
 	title: string,
 	content: string,
-	date: string
+	date: string,
+	sentiment: number
 };
 
 export function getWebsiteInfo() {
+	let sentiment = new Sentiment();
 	return new Promise((resolve, reject) => {
 		axios({
 			url: "http://paste2vljvhmwq5zy33re2hzu4fisgqsohufgbljqomib2brzx3q4mid.onion/lists",
@@ -31,7 +34,8 @@ export function getWebsiteInfo() {
 					author: "",
 					title: "",
 					content: "",
-					date: ""
+					date: "",
+					sentiment: 0
 				});
 			}
 			
@@ -58,7 +62,7 @@ export function getWebsiteInfo() {
 				//Insert the id
 				const pasteID = $(element).children("a").attr("href")?.split("/")[4];
 				pastes[element_index].id = pasteID as string;
-				
+
 				//Insert the content
 				console.log("Fetching paste " + pasteID);
 				axios({
@@ -71,6 +75,8 @@ export function getWebsiteInfo() {
 					const content: string = res.data;
 					pastes[element_index].content = content.trimStart().trimEnd();
 					contentCount++;
+					//Insert the sentiment analysis value
+					pastes[element_index].sentiment = sentiment.analyze(content).score;
 					console.log("Contents fetched count: " + contentCount);
 					// If content fetches are finished:
 					if (contentCount === titleElements.length) {

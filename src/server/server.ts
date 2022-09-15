@@ -15,7 +15,6 @@ app.use(express.static(root));
 //initialize interval as undefined
 let fetchInterval: any = undefined;
 
-
 app.get('/fetch', (_req, res) => {
   fetchData();
   res.send("fetching data");

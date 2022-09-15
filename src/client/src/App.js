@@ -11,7 +11,7 @@ function App() {
   const [search, setSearch] = useState("");
   const [filteredPastes, setFiltered] = useState([]);
 
-  const debouncedSearch = useDebounce(search, 500);
+  const debouncedSearch = useDebounce(search, 300);
 
   useEffect(() => {
     const fetchPastes = async () => {
@@ -65,7 +65,8 @@ function getPastesComponents(pastes) {
         title={paste.title}
         author={paste.author} 
         content={paste.content} 
-        date={paste.date}/>)
+        date={paste.date}
+        sentiment={paste.sentiment}/>)
     );
   } else {
     return <h1 className='loading'>No pastes avaliable</h1>;

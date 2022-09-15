@@ -16,7 +16,8 @@ export function createDBTable() {
 		author TEXT NOT NULL, 
 		title TEXT NOT NULL, 
 		content TEXT NOT NULL, 
-		date TEXT NOT NULL)`;
+		date TEXT NOT NULL, 
+		sentiment INTEGER NOT NULL)`;
 	db.run(createTable);
 }
 
@@ -31,11 +32,11 @@ export function dropTable() {
 export function insertData(data: pasteI[]) {
 	data.forEach(pasteData => {
 		//Ignores the insert if the paste has the same id as another one in the database
-		const insertString = `INSERT OR IGNORE INTO pastes(id, author, title, content, date)
-		VALUES (?, ?, ?, ?, ?)`;
+		const insertString = `INSERT OR IGNORE INTO pastes(id, author, title, content, date, sentiment)
+		VALUES (?, ?, ?, ?, ?, ?)`;
 		db.run(insertString,
 			[pasteData.id, pasteData.author, pasteData.title, 
-				pasteData.content, pasteData.date],
+				pasteData.content, pasteData.date, pasteData.sentiment],
 			(err) => {
 				if (err) return console.error(err.message);
 			}
