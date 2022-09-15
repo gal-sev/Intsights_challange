@@ -4,11 +4,14 @@ import Paste from './components/Paste';
 import "./app.scss";
 import SideNav from './components/sideNav';
 import SearchBar from './components/SearchBar';
+import useDebounce from './hooks/useDebounce';
 
 function App() {
   const [pastes, setPastes] = useState([]);
   const [search, setSearch] = useState("");
   const [filteredPastes, setFiltered] = useState([]);
+
+  const debouncedSearch = useDebounce(search, 500);
 
   useEffect(() => {
     const fetchPastes = async () => {
@@ -20,8 +23,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    setFiltered(filterPastes(pastes, search));
-  }, [pastes, search]);
+    setFiltered(filterPastes(pastes, debouncedSearch));
+  }, [pastes, debouncedSearch]);
   
   return (
     <>
