@@ -1,6 +1,8 @@
 # Dark web paste scrapper
 Dark web paste website scrapper I made in Intsights hackathon.
 
+![Game UI](./ScrapperUI.png)
+
 * The header of each paste in the client is colored based on the general sentiment of the paste: green = positive, red = negative and white = neutral.
 # How to run?
 - ```docker run -it -p 8118:8118 -p 9051:9051 -d dperson/torproxy``` to open the proxy.
