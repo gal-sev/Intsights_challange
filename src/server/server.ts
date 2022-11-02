@@ -22,7 +22,7 @@ app.get('/fetch', (_req, res) => {
 
 app.get('/fetchLoop', (_req, res) => {
   if (fetchInterval === undefined) {
-    const interval = setInterval(() => fetchData(), 120000);
+    const interval = setInterval(() => fetchData(), 300000);
     fetchInterval = interval;
     res.send("Fetch loop started");
   } else {
@@ -60,7 +60,7 @@ app.get('/cleanTable', (_req, res) => {
 });
 
 app.get('*', (_req, res) => {
-  res.sendFile(path.join(root, 'index.html'));
+  res.send("404")
 });
 
 function fetchData() {
